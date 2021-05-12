@@ -97,13 +97,12 @@ function updateValues() {
     ).toFixed(2);
 
     count_expense = amounts.map(expense => expense < 0 ?? count_expense.push(expense))
-
-    final_count = count_expense.filter(count => count == true )
+                            .filter(count => count == true ).length
 
     balance.innerHTML = `$${total}`;
     money_plus.innerText = `$${income}`;
     money_minus.innerText = `$${expense}`;
-    expense_count.innerText =  `Total number of expense : ${final_count.length}`;
+    expense_count.innerText =  `Total number of expense : ${count_expense}`;
 
 }
 
