@@ -17,10 +17,14 @@ const localStorageTransactions = JSON.parse(
     localStorage.getItem('transactions')
     );
 
-let transactions = dummyTransactions
-localStorage.getItem('transactions') !== null ? 
+let transactions = localStorage.getItem('transactions') !== null ? 
 localStorageTransactions : [];
 
+
+// Update local storage transactions
+function updateLocalStorage() {
+    localStorage.setItem('transactions', JSON.stringify(transactions));
+}
 
 // Add transaction
 function addTransaction(e) {
@@ -77,7 +81,6 @@ function addTransactionDOM(transaction) {
 function updateValues() {
     const amounts = transactions.map(transaction =>
         transaction.amount);
-       console.log(amounts);
         const total = amounts.reduce((acc, item) => (acc += item), 0)
         .toFixed(2);
 
@@ -95,30 +98,22 @@ function updateValues() {
     money_plus.innerText = `$${income}`;
     money_minus.innerText = `$${expense}`;
 
-   console.log(balance)
-   console.log(money_plus)
-   console.log(money_minus)
-
 }
 
 // Remove transaction by ID
 function removeTransaction(id) {
     transactions = transactions.filter(transaction => transaction.id 
     !== id);
-
-updateLocalStorage();
-
+    updateLocalStorage();
     init();
 }
 
-// Update local storage transactions
-function updateLocalstorage() {
-    localStorage.setItem('transactions', JSON.stringify(transactions));
-}
+
 
 // Init app
 function init() {
     list.innerHTML = '';
+
 
     transactions.forEach(addTransactionDOM);
     updateValues();
