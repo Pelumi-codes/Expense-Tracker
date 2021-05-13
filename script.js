@@ -96,7 +96,7 @@ function updateValues() {
         -1
     ).toFixed(2);
 
-    count_expense = amounts.map(expense => expense < 0 ?? count_expense.push(expense))
+    count_expense = amounts.map(expense => expense < 0 ? true : false)
                             .filter(count => count == true ).length
 
     balance.innerHTML = `$${total}`;
